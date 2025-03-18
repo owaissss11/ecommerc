@@ -1,0 +1,18 @@
+<form id="google-sheet-form">
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="email" name="email" placeholder="Your Email" required>
+  <textarea name="message" placeholder="Your Message"></textarea>
+  <button type="submit">Send</button>
+</form>
+
+<script>
+  document.getElementById("google-sheet-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    
+    fetch("https://script.google.com/macros/s/AKfycbxlHUsi1oRK7TXTiE9Ntd2sTK4CtTjtEEvIL0Fud1BirQ-YNyIclGGW4Qgnp6OvJFlZjQ/exec", {
+      method: "POST",
+      body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
+      headers: { "Content-Type": "application/json" }
+    }).then(res => res.text()).then(alert);
+  });
+</script>
